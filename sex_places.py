@@ -269,6 +269,13 @@ def find_newest_file(pattern='*.*', source_dir='.'):
     return str(file)
 
 
+def load_newest_dataset(pattern, usecols, na_value=''):
+    print('Loading companies dataset…')
+    filepath = find_newest_file(pattern)
+    dataset = pd.read_csv(filepath, usecols=usecols, low_memory=False)
+    dataset = dataset.fillna(value=na_value)
+    return dataset
+
 
 def get_name(company):
     trade_name = company.get('trade_name')
@@ -278,11 +285,11 @@ def get_name(company):
 
 
 if __name__ == '__main__':
-    print('Loading companies dataset…')
-    usecols = ('cnpj', 'trade_name', 'name', 'latitude', 'longitude')
-    companies_path = find_newest_file('companies')
-    companies = pd.read_csv(companies_path, usecols=usecols, low_memory=False)
-    companies = companies.fillna(value='')
+
+    companies = load_newest_dataset(
+        pattern='**/*companies.xz',
+        usecols=('cnpj', 'trade_name', 'name', 'latitude', 'longitude')
+    )
 
     try:
         sample = int(sys.argv[1])
