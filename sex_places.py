@@ -7,6 +7,7 @@ import sys
 from configparser import RawConfigParser
 from datetime import date
 from itertools import chain
+from pathlib import Path
 from urllib.parse import parse_qs, urlencode, urlparse
 
 import pandas as pd
@@ -253,23 +254,20 @@ def write_to_csv(path, place=None, **kwargs):
             writer.writerow(contents)
 
 
-def find_newest_file(name):
+def find_newest_file(pattern='*.*', source_dir='.'):
     """
     Assuming that the files will be in the form of :
     yyyy-mm-dd-type_of_file.xz we can try to find the newest file
-    based on the date, but if the file doesn't exist fallback to another
-    date until all dates are exhausted
+    based on the date.
     """
-    date_regex = re.compile('\d{4}-\d{2}-\d{2}')
+    files = sorted(Path(source_dir).glob(pattern))
+    file = files.pop()
 
-    matches = (date_regex.findall(f) for f in os.listdir(DATA_DIR))
-    dates = sorted(set([l[0] for l in matches if l]), reverse=True)
-    for d in dates:
-        filename = os.path.join(DATA_DIR, '{}-{}.xz'.format(d, name))
-        if os.path.isfile(filename):
-            return filename
+    if not file:
+        return None
 
-    return None
+    return str(file)
+
 
 
 def get_name(company):
