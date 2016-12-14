@@ -1,2 +1,6 @@
 config.ini
 data/*.xz
+.venv
+.idea
+__pycache__
+
