@@ -1,4 +1,4 @@
-This script was originally written by by [Guilherme Prokisch](https://github.com/guilhermeprokisch) as a contribution to [Serenata de Amor](https://github.com/datasciencebr/serenata-de-amor). This repo was set just for a _collective programming_ event focused on refactoring and optimizing it. 
+This script was originally written by by [Guilherme Prokisch](https://github.com/guilhermeprokisch) as a contribution to [Serenata de Amor](https://github.com/datasciencebr/serenata-de-amor). This repo was set just for a _collective programming_ event focused on refactoring and optimizing it.
 
 **Requirements**
 
@@ -19,3 +19,6 @@ To use a sample of the dataset add a number after the command. For example this 
 ```python
 $ python sex_places.py 42
 ```
+
+**New local to get Dataset**
+* [This dataset](https://github.com/okfn-brasil/serenata-de-amor/blob/master/contrib/data/companies_sample.xz)
